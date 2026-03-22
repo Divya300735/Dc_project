@@ -1,0 +1,782 @@
+/* Modern Dark Theme with Neon Accents */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+/* PCM Information Cards */
+.pcm-info-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.pcm-info-card {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 86, 179, 0.05) 100%);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.pcm-info-card:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 86, 179, 0.1) 100%);
+    border-color: rgba(0, 123, 255, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.15);
+}
+
+.pcm-info-title {
+    color: #007bff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pcm-info-value {
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.pcm-info-formula {
+    color: #666;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    background: rgba(0, 123, 255, 0.1);
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.pcm-info-status {
+    color: #28a745;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.pcm-info-comparison {
+    color: #28a745;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    background: rgba(40, 167, 69, 0.1);
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* Special styling for Nyquist card */
+#nyquist-card {
+    border-color: rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(34, 139, 34, 0.05) 100%);
+}
+
+#nyquist-card:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%);
+    border-color: rgba(40, 167, 69, 0.4);
+}
+
+#nyquist-card .pcm-info-title {
+    color: #28a745;
+}
+
+#nyquist-card.aliasing-risk {
+    border-color: rgba(220, 53, 69, 0.3);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(200, 35, 51, 0.05) 100%);
+}
+
+#nyquist-card.aliasing-risk:hover {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);
+    border-color: rgba(220, 53, 69, 0.4);
+}
+
+#nyquist-card.aliasing-risk .pcm-info-title {
+    color: #dc3545;
+}
+
+#nyquist-card.aliasing-risk .pcm-info-status {
+    color: #dc3545;
+}
+
+#nyquist-card.aliasing-risk .pcm-info-comparison {
+    color: #dc3545;
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.no-data {
+    text-align: center;
+    color: #6c757d;
+    font-style: italic;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%);
+    border-radius: 15px;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: 0 8px 32px rgba(59, 130, 246, 0.1);
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.icon {
+    margin-right: 15px;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    font-weight: 300;
+}
+
+/* Tab Navigation */
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.tab-btn {
+    background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #a0a0a0;
+    padding: 15px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: linear-gradient(135deg, #2d1b69 0%, #3b82f6 100%);
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: #ffffff;
+    border-color: #3b82f6;
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.tab-icon {
+    font-size: 1.2rem;
+}
+
+/* Main Content Layout */
+.main-content {
+    min-height: calc(100vh - 200px);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* PCM Layout Styles */
+.pcm-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.pcm-controls {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.pcm-controls .panel-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pcm-controls .control-label {
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.pcm-controls .control-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.pcm-controls .control-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e9ecef;
+    outline: none;
+    margin: 10px 0;
+}
+
+.pcm-controls .control-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #007bff;
+    cursor: pointer;
+}
+
+.pcm-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pcm-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pcm-btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.pcm-btn-primary:hover {
+    background: #0056b3;
+}
+
+.pcm-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.pcm-btn-secondary:hover {
+    background: #545b62;
+}
+
+.pcm-results {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.pcm-results .panel-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.pcm-graphs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.pcm-graph {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.pcm-graph h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.pcm-canvas {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+.pcm-table-container {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.pcm-table-container h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.pcm-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.pcm-table th {
+    background: #007bff;
+    color: white;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.pcm-table td {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+    color: #333;
+}
+
+.pcm-table tr:hover td {
+    background: #f8f9fa;
+}
+
+/* Delta Layout Styles */
+.delta-layout {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.delta-controls {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.delta-controls .panel-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.delta-controls .control-label {
+    color: #555;
+    font-weight: 500;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.delta-controls .control-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    background: white;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+.delta-controls .control-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    background: #e9ecef;
+    outline: none;
+    margin: 10px 0;
+}
+
+.delta-controls .control-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #28a745;
+    cursor: pointer;
+}
+
+.delta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.delta-btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delta-btn-primary {
+    background: #28a745;
+    color: white;
+}
+
+.delta-btn-primary:hover {
+    background: #1e7e34;
+}
+
+.delta-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.delta-btn-secondary:hover {
+    background: #545b62;
+}
+
+.delta-results {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 25px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.delta-results .panel-title {
+    color: #333;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.delta-graphs {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.delta-graph {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.delta-graph h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.delta-canvas {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #e9ecef;
+    border-radius: 4px;
+}
+
+.delta-table-container {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.delta-table-container h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.delta-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.delta-table th {
+    background: #28a745;
+    color: white;
+    padding: 10px 8px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.delta-table td {
+    padding: 8px;
+    border-bottom: 1px solid #dee2e6;
+    color: #333;
+}
+
+.delta-table tr:hover td {
+    background: #f8f9fa;
+}
+
+/* Delta Information Cards */
+.delta-info-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #dee2e6;
+}
+
+.delta-info-card {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(34, 139, 34, 0.05) 100%);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+    border-radius: 6px;
+    padding: 12px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+}
+
+.delta-info-card:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%);
+    border-color: rgba(40, 167, 69, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.15);
+}
+
+.delta-info-title {
+    color: #28a745;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.delta-info-value {
+    color: #333;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.delta-info-formula {
+    color: #666;
+    font-size: 0.8rem;
+    font-family: 'Courier New', monospace;
+    background: rgba(40, 167, 69, 0.1);
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.delta-info-warning {
+    color: #dc3545;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.delta-info-comparison {
+    color: #dc3545;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+    background: rgba(220, 53, 69, 0.1);
+    padding: 4px 6px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+/* Special styling for overload card */
+#slope-overload-card {
+    border-color: rgba(220, 53, 69, 0.3);
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.05) 0%, rgba(200, 35, 51, 0.05) 100%);
+}
+
+#slope-overload-card:hover {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(200, 35, 51, 0.1) 100%);
+    border-color: rgba(220, 53, 69, 0.4);
+}
+
+#slope-overload-card .delta-info-title {
+    color: #dc3545;
+}
+
+#slope-overload-card.no-overload {
+    border-color: rgba(40, 167, 69, 0.3);
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(34, 139, 34, 0.05) 100%);
+}
+
+#slope-overload-card.no-overload:hover {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(34, 139, 34, 0.1) 100%);
+    border-color: rgba(40, 167, 69, 0.4);
+}
+
+#slope-overload-card.no-overload .delta-info-title {
+    color: #28a745;
+}
+
+#slope-overload-card.no-overload .delta-info-warning {
+    color: #28a745;
+}
+
+#slope-overload-card.no-overload .delta-info-comparison {
+    color: #28a745;
+    background: rgba(40, 167, 69, 0.1);
+}
+
+/* Update body and container for light theme */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #ffffff;
+    color: #333333;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Update header for light theme */
+.header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 25px;
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 123, 255, 0.3);
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* Update tab navigation for light theme */
+.tab-nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    gap: 10px;
+}
+
+.tab-btn {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    color: #6c757d;
+    padding: 12px 25px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.tab-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* Update main content */
+.main-content {
+    min-height: calc(100vh - 200px);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

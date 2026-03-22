@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog to Digital Conversion Tool</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">
+                <span class="icon">📡</span>
+                Analog to Digital Conversion Tool
+            </h1>
+            <p class="subtitle">PCM & Delta Modulation Simulator</p>
+        </header>
+
+        <!-- Tab Navigation -->
+        <nav class="tab-nav">
+            <button class="tab-btn active" data-tab="pcm">
+                <span class="tab-icon">📊</span>
+                PCM Simulation
+            </button>
+            <button class="tab-btn" data-tab="delta">
+                <span class="tab-icon">📉</span>
+                Delta Modulation
+            </button>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- PCM Module -->
+            <div id="pcm-tab" class="tab-content active">
+                <div class="pcm-layout">
+                    <!-- Left Panel - Controls -->
+                    <div class="pcm-controls">
+                        <h2 class="panel-title">PCM Parameters</h2>
+                        
+                        <!-- Signal Type -->
+                        <div class="control-group">
+                            <label class="control-label">Signal Type</label>
+                            <select id="pcm-signal-type" class="control-select">
+                                <option value="sine">Sine Wave</option>
+                                <option value="square">Square Wave</option>
+                                <option value="triangle">Triangle Wave</option>
+                            </select>
+                        </div>
+
+                        <!-- Amplitude -->
+                        <div class="control-group">
+                            <label class="control-label">Amplitude: <span id="amplitude-value">2.0</span> V</label>
+                            <input type="range" id="amplitude" min="0.1" max="5" step="0.1" value="2.0" class="control-slider">
+                        </div>
+
+                        <!-- Signal Frequency -->
+                        <div class="control-group">
+                            <label class="control-label">Signal Frequency: <span id="frequency-value">2</span> Hz</label>
+                            <input type="range" id="frequency" min="1" max="20" step="1" value="2" class="control-slider">
+                        </div>
+
+                        <!-- Sampling Frequency -->
+                        <div class="control-group">
+                            <label class="control-label">Sampling Frequency (Fs): <span id="sampling-freq-value">20</span> Hz</label>
+                            <input type="range" id="sampling-freq" min="10" max="200" step="5" value="20" class="control-slider">
+                        </div>
+
+                        <!-- Quantization Bits -->
+                        <div class="control-group">
+                            <label class="control-label">Quantization Bits: <span id="quant-bits-value">3</span> bits</label>
+                            <input type="range" id="quant-bits" min="1" max="8" step="1" value="3" class="control-slider">
+                        </div>
+
+                        <!-- PCM Information Cards -->
+                        <div class="pcm-info-section">
+                            <!-- Quantization Levels Card -->
+                            <div class="pcm-info-card">
+                                <div class="pcm-info-title">Quantization Levels</div>
+                                <div class="pcm-info-value"><span id="quant-levels-info">8</span> levels</div>
+                                <div class="pcm-info-formula">Levels = 2^bits = 2^<span id="quant-levels-bits">3</span> = 8</div>
+                            </div>
+
+                            <!-- Step Size Card -->
+                            <div class="pcm-info-card">
+                                <div class="pcm-info-title">Quantization Step Size</div>
+                                <div class="pcm-info-value"><span id="quant-step-info">0.5</span> V</div>
+                                <div class="pcm-info-formula">Δ = 2A/L = 2×<span id="quant-step-a">2.0</span>/<span id="quant-step-l">8</span> = 0.5 V</div>
+                            </div>
+
+                            <!-- Maximum Quantization Error Card -->
+                            <div class="pcm-info-card">
+                                <div class="pcm-info-title">Max Quantization Error</div>
+                                <div class="pcm-info-value">±<span id="quant-error-info">0.25</span> V</div>
+                                <div class="pcm-info-formula">Error = Δ/2 = <span id="quant-error-delta">0.5</span>/2 = 0.25 V</div>
+                            </div>
+
+                            <!-- Bit Rate Card -->
+                            <div class="pcm-info-card">
+                                <div class="pcm-info-title">PCM Bit Rate</div>
+                                <div class="pcm-info-value"><span id="pcm-bitrate-info">60</span> bps</div>
+                                <div class="pcm-info-formula">Bit Rate = Fs × bits = <span id="pcm-bitrate-fs">20</span> × <span id="pcm-bitrate-bits">3</span> = 60 bps</div>
+                            </div>
+
+                            <!-- Signal to Quantization Noise Ratio Card -->
+                            <div class="pcm-info-card">
+                                <div class="pcm-info-title">SQNR (Theoretical)</div>
+                                <div class="pcm-info-value"><span id="sqnr-info">18.06</span> dB</div>
+                                <div class="pcm-info-formula">SQNR = 6.02 × bits = 6.02 × <span id="sqnr-bits">3</span> = 18.06 dB</div>
+                            </div>
+
+                            <!-- Nyquist Criterion Card -->
+                            <div class="pcm-info-card" id="nyquist-card">
+                                <div class="pcm-info-title" id="nyquist-title">✅ Nyquist Criterion Satisfied</div>
+                                <div class="pcm-info-status" id="nyquist-message">Sampling rate is sufficient</div>
+                                <div class="pcm-info-formula">Condition: Fs ≥ 2 × Fsignal</div>
+                                <div class="pcm-info-comparison">
+                                    <span id="nyquist-comparison">20 ≥ 4</span> ✓ No Aliasing
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="pcm-buttons">
+                            <button id="pcm-generate" class="pcm-btn pcm-btn-secondary">Generate Signal</button>
+                            <button id="pcm-run" class="pcm-btn pcm-btn-primary">Run PCM Simulation</button>
+                            <button id="pcm-reset" class="pcm-btn pcm-btn-secondary">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Results -->
+                    <div class="pcm-results">
+                        <h2 class="panel-title">PCM Simulation Results</h2>
+                        
+                        <!-- Graphs Container -->
+                        <div class="pcm-graphs">
+                            <!-- Analog Signal -->
+                            <div class="pcm-graph">
+                                <h3>Analog Signal</h3>
+                                <canvas id="analog-chart" class="pcm-canvas"></canvas>
+                            </div>
+
+                            <!-- Sampled Signal -->
+                            <div class="pcm-graph">
+                                <h3>Sampled Signal</h3>
+                                <canvas id="sampled-chart" class="pcm-canvas"></canvas>
+                            </div>
+
+                            <!-- Quantized Signal -->
+                            <div class="pcm-graph">
+                                <h3>Quantized Signal</h3>
+                                <canvas id="quantized-chart" class="pcm-canvas"></canvas>
+                            </div>
+
+                            <!-- PCM Digital Signal -->
+                            <div class="pcm-graph">
+                                <h3>PCM Digital Signal</h3>
+                                <canvas id="pcm-digital-chart" class="pcm-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="pcm-table-container">
+                            <h3>PCM Data Table</h3>
+                            <table class="pcm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sample</th>
+                                        <th>Time (s)</th>
+                                        <th>Sample Value</th>
+                                        <th>Level</th>
+                                        <th>Quantized</th>
+                                        <th>Binary</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="pcm-table-body">
+                                    <tr>
+                                        <td colspan="6" class="no-data">Run simulation to see data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Delta Module -->
+            <div id="delta-tab" class="tab-content">
+                <div class="delta-layout">
+                    <!-- Left Panel - Controls -->
+                    <div class="delta-controls">
+                        <h2 class="panel-title">Delta Modulation Parameters</h2>
+                        
+                        <!-- Signal Type -->
+                        <div class="control-group">
+                            <label class="control-label">Signal Type</label>
+                            <select id="delta-signal-type" class="control-select">
+                                <option value="sine">Sine Wave</option>
+                                <option value="square">Square Wave</option>
+                                <option value="triangle">Triangle Wave</option>
+                            </select>
+                        </div>
+
+                        <!-- Amplitude -->
+                        <div class="control-group">
+                            <label class="control-label">Amplitude: <span id="delta-amplitude-value">2.0</span> V</label>
+                            <input type="range" id="delta-amplitude" min="0.1" max="5" step="0.1" value="2.0" class="control-slider">
+                        </div>
+
+                        <!-- Signal Frequency -->
+                        <div class="control-group">
+                            <label class="control-label">Signal Frequency: <span id="delta-frequency-value">2</span> Hz</label>
+                            <input type="range" id="delta-frequency" min="1" max="20" step="1" value="2" class="control-slider">
+                        </div>
+
+                        <!-- Sampling Frequency -->
+                        <div class="control-group">
+                            <label class="control-label">Sampling Frequency (Fs): <span id="delta-sampling-freq-value">20</span> Hz</label>
+                            <input type="range" id="delta-sampling-freq" min="10" max="200" step="5" value="20" class="control-slider">
+                        </div>
+
+                        <!-- Step Size -->
+                        <div class="control-group">
+                            <label class="control-label">Step Size: <span id="step-size-value">0.1</span> V</label>
+                            <input type="range" id="step-size" min="0.01" max="1" step="0.01" value="0.1" class="control-slider">
+                        </div>
+
+                        <!-- Delta Information Cards -->
+                        <div class="delta-info-section">
+                            <!-- Bit Rate Card -->
+                            <div class="delta-info-card">
+                                <div class="delta-info-title">Bit Rate</div>
+                                <div class="delta-info-value"><span id="delta-bitrate-info">20</span> bps</div>
+                                <div class="delta-info-formula">Bit Rate = Fs = <span id="delta-bitrate-formula">20</span> Hz</div>
+                            </div>
+
+                            <!-- Granular Noise Card -->
+                            <div class="delta-info-card">
+                                <div class="delta-info-title">Granular Noise</div>
+                                <div class="delta-info-value">±<span id="granular-noise-info">0.05</span> V</div>
+                                <div class="delta-info-formula">Granular Noise = Δ/2 = <span id="granular-noise-formula">0.1/2</span> V</div>
+                            </div>
+
+                            <!-- Maximum Slope Card -->
+                            <div class="delta-info-card">
+                                <div class="delta-info-title">Maximum Signal Slope</div>
+                                <div class="delta-info-value"><span id="max-slope-info">25.13</span> V/s</div>
+                                <div class="delta-info-formula">Max Slope = 2πAf = 2π × <span id="max-slope-a">2.0</span> × <span id="max-slope-f">2</span></div>
+                            </div>
+
+                            <!-- Maximum Tracking Slope Card -->
+                            <div class="delta-info-card">
+                                <div class="delta-info-title">Maximum Tracking Slope</div>
+                                <div class="delta-info-value"><span id="max-tracking-slope-info">2.0</span> V/s</div>
+                                <div class="delta-info-formula">Tracking Slope = Δ × Fs = <span id="tracking-delta">0.1</span> × <span id="tracking-fs">20</span></div>
+                            </div>
+
+                            <!-- Slope Overload Warning Card -->
+                            <div class="delta-info-card" id="slope-overload-card">
+                                <div class="delta-info-title" id="overload-title">⚠️ Slope Overload Risk</div>
+                                <div class="delta-info-warning" id="overload-message">Signal slope exceeds tracking capability</div>
+                                <div class="delta-info-formula">Condition: 2πAf > Δ × Fs</div>
+                                <div class="delta-info-comparison">
+                                    <span id="slope-comparison">25.13 > 2.0</span> ✓ Overload Detected
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="delta-buttons">
+                            <button id="delta-generate" class="delta-btn delta-btn-secondary">Generate Signal</button>
+                            <button id="delta-run" class="delta-btn delta-btn-primary">Run Delta Simulation</button>
+                            <button id="delta-reset" class="delta-btn delta-btn-secondary">Reset</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Results -->
+                    <div class="delta-results">
+                        <h2 class="panel-title">Delta Modulation Results</h2>
+                        
+                        <!-- Graphs Container -->
+                        <div class="delta-graphs">
+                            <!-- Original Signal -->
+                            <div class="delta-graph">
+                                <h3>Signal</h3>
+                                <canvas id="delta-original-chart" class="delta-canvas"></canvas>
+                            </div>
+
+                            <!-- Staircase Approximation -->
+                            <div class="delta-graph">
+                                <h3>Staircase Approximation</h3>
+                                <canvas id="staircase-chart" class="delta-canvas"></canvas>
+                            </div>
+
+                            <!-- Delta Bitstream -->
+                            <div class="delta-graph">
+                                <h3>Bitstream</h3>
+                                <canvas id="delta-bitstream-chart" class="delta-canvas"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Data Table -->
+                        <div class="delta-table-container">
+                            <h3>Delta Data Table</h3>
+                            <table class="delta-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time (s)</th>
+                                        <th>Signal Value</th>
+                                        <th>Staircase</th>
+                                        <th>Bit</th>
+                                        <th>Direction</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="delta-table-body">
+                                    <tr>
+                                        <td colspan="5" class="no-data">Run simulation to see data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
