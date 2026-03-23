@@ -125,6 +125,7 @@
                         <div class="pcm-buttons">
                             <button id="pcm-generate" class="pcm-btn pcm-btn-secondary">Generate Signal</button>
                             <button id="pcm-run" class="pcm-btn pcm-btn-primary">Run PCM Simulation</button>
+                            <button id="pcm-animate" class="pcm-btn pcm-btn-animate">▶️ Animate PCM</button>
                             <button id="pcm-reset" class="pcm-btn pcm-btn-secondary">Reset</button>
                         </div>
                     </div>
@@ -271,6 +272,7 @@
                         <div class="delta-buttons">
                             <button id="delta-generate" class="delta-btn delta-btn-secondary">Generate Signal</button>
                             <button id="delta-run" class="delta-btn delta-btn-primary">Run Delta Simulation</button>
+                            <button id="delta-animate" class="delta-btn delta-btn-animate">▶️ Animate Delta</button>
                             <button id="delta-reset" class="delta-btn delta-btn-secondary">Reset</button>
                         </div>
                     </div>
@@ -324,6 +326,62 @@
                 </div>
             </div>
         </main>
+    </div>
+
+    <!-- Animation Modal Overlay -->
+    <div id="animation-modal" class="animation-modal">
+        <div class="animation-content">
+            <div class="animation-header">
+                <h2 id="animation-title">🔬 Step-by-Step Animation</h2>
+                <button id="animation-close" class="animation-close-btn">&times;</button>
+            </div>
+            
+            <!-- Progress Bar -->
+            <div class="animation-progress-container">
+                <div class="animation-progress-bar" id="animation-progress"></div>
+                <div class="animation-step-indicator" id="step-indicator">Step 1 of 4: Sampling</div>
+            </div>
+            
+            <!-- Animation Display Area -->
+            <div class="animation-display">
+                <div class="animation-stage" id="animation-stage">
+                    <canvas id="animation-canvas" class="animation-canvas"></canvas>
+                    <div class="animation-overlay" id="animation-overlay">
+                        <div class="animation-highlight" id="animation-highlight"></div>
+                        <div class="animation-label" id="animation-label">Click Play to Start</div>
+                    </div>
+                </div>
+                
+                <!-- Step Explanation Panel -->
+                <div class="animation-explanation" id="animation-explanation">
+                    <h3 id="explanation-title">Welcome to PCM Animation</h3>
+                    <p id="explanation-text">This animation will show you how analog signals are converted to digital using Pulse Code Modulation (PCM). You'll see sampling, quantization, and encoding steps.</p>
+                    <div class="animation-data-display" id="animation-data-display">
+                        <div class="data-row"><span class="data-label">Time:</span><span class="data-value" id="anim-time">-</span></div>
+                        <div class="data-row"><span class="data-label">Value:</span><span class="data-value" id="anim-value">-</span></div>
+                        <div class="data-row"><span class="data-label">Level:</span><span class="data-value" id="anim-level">-</span></div>
+                        <div class="data-row"><span class="data-label">Binary:</span><span class="data-value binary" id="anim-binary">-</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Animation Controls -->
+            <div class="animation-controls">
+                <button id="anim-first" class="anim-control-btn" title="Go to First">⏮️</button>
+                <button id="anim-prev" class="anim-control-btn" title="Previous Step">⏪</button>
+                <button id="anim-play-pause" class="anim-control-btn play-btn" title="Play/Pause">▶️</button>
+                <button id="anim-next" class="anim-control-btn" title="Next Step">⏩</button>
+                <button id="anim-last" class="anim-control-btn" title="Go to Last">⏭️</button>
+                
+                <div class="anim-speed-control">
+                    <label for="anim-speed">Speed:</label>
+                    <input type="range" id="anim-speed" min="0.1" max="3" step="0.1" value="1" class="anim-speed-slider">
+                    <span id="anim-speed-value">1.0x</span>
+                </div>
+                
+                <button id="anim-reset" class="anim-control-btn reset-btn" title="Reset">🔄</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>
