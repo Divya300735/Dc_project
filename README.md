@@ -182,7 +182,7 @@ This project is licensed under the MIT License - feel free to use for educationa
 
 ---
 
-## 🙏 Acknowledgments
+## 🎖️ Acknowledgments
 
 - Built as a learning project for Digital Communication concepts
 - Chart.js community for excellent documentation
@@ -190,7 +190,7 @@ This project is licensed under the MIT License - feel free to use for educationa
 
 ---
 
-**Made with ❤️ by Divya**
+**Made with ❤️ by Divya and Vedika**
 
 *Star ⭐ this repo if you found it helpful!*
 
