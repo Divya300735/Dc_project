@@ -370,6 +370,10 @@ function runPCMSimulation() {
     
     // Update table
     updatePCMTable(tableData);
+
+    // Update final output
+    const finalSequence = tableData.map(row => row.binaryCode).join(' ');
+    document.getElementById('pcm-final-output').textContent = finalSequence;
 }
 
 function updatePCMCharts(analogSignal, sampledSignal, quantizedSignal, pcmWaveform) {
@@ -473,6 +477,10 @@ function runDeltaSimulation() {
     
     // Update table
     updateDeltaTable(tableData);
+
+    // Update final output
+    const finalSequence = tableData.map(row => row.bit).join(' ');
+    document.getElementById('delta-final-output').textContent = finalSequence;
 }
 
 function updateDeltaCharts(analogSignal, staircaseSignal, bitstream, errorSignal) {
@@ -794,10 +802,14 @@ function clearDeltaCharts() {
 
 function clearPCMTable() {
     document.getElementById('pcm-table-body').innerHTML = '<tr><td colspan="6" class="no-data">Run simulation to see data</td></tr>';
+    const pcmFinal = document.getElementById('pcm-final-output');
+    if (pcmFinal) pcmFinal.textContent = 'Run simulation to see final digital sequence';
 }
 
 function clearDeltaTable() {
     document.getElementById('delta-table-body').innerHTML = '<tr><td colspan="5" class="no-data">Run simulation to see data</td></tr>';
+    const deltaFinal = document.getElementById('delta-final-output');
+    if (deltaFinal) deltaFinal.textContent = 'Run simulation to see final digital sequence';
 }
 
 // ================== ANIMATION SYSTEM ==================

@@ -1121,6 +1121,42 @@ body {
     animation: fadeIn 0.5s ease;
 }
 
+/* Final Digital Output Styles */
+.final-output-container {
+    background: white;
+    border-radius: 6px;
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.final-output-container h3 {
+    color: #333;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.output-box {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    padding: 15px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #007bff;
+    text-align: center;
+    word-break: break-all;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 2px;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
